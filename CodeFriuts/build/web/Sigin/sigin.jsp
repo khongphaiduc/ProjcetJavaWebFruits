@@ -23,9 +23,12 @@
 
             <label for="confirmPassword">Nhập lại mật khẩu:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-            <button type="submit">Đăng Ký</button>
-            <button type="button" onclick="window.location.href = 'index.jsp'">Hủy</button>
+              <br>
+              <br>
+              <button type="submit" style="background-color: #28a745">Đăng Ký</button>
+            
+              <button type="button"  style="background-color: yellowgreen" onclick="window.location.href = '../login/loginuser.jsp'">Hủy</button>  
+<!--     chuyển hướng đến form đăng nhập nếu người dùng Ấn hủy đăng ký tài khoảng mới -->
         </form>
     </div>
     <script>

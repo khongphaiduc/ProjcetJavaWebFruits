@@ -1,10 +1,15 @@
- body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f06, #ff9);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f06, #ff9);
             margin: 0;
             overflow: hidden;
         }
@@ -48,27 +53,32 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             outline: none;
         }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
         button {
-            background: #28a745;
             color: white;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
-            width: 100%;
+            width: 48%;
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-        button:hover {
+        button.login-btn {
+            background: #28a745;
+        }
+        button.login-btn:hover {
             background: #218838;
         }
-        button[type="button"] {
-            background: #dc3545;
-            margin-top: 10px;
+        button.register-btn {
+            background: #007bff;
         }
-        button[type="button"]:hover {
-            background: #c82333;
+        button.register-btn:hover {
+            background: #0056b3;
         }
         .leaf {
             position: absolute;
@@ -85,3 +95,5 @@
                 opacity: 0;
             }
         }
+        
+      

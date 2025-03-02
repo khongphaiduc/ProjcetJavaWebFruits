@@ -7,7 +7,6 @@
         <title>JSP Page</title>
         <<link rel="stylesheet" href="../css/logincss.css"/>>
     </head>
-    <body>
  <body>
     <h1 class="welcome-text">Welcome to Fruit Management</h1>
     <section>
@@ -26,6 +25,9 @@
                 <a href="#">Forgot Password</a>
             </div>
             <button>Login</button>
+            <br>
+           <br>
+             <button type="button" onclick="window.location.href = '../Sigin/sigin.jsp'">Đăng Ký</button>  
             <div class="register">
                 <p>Anh đang nghiên cứu</p>
             </div>
