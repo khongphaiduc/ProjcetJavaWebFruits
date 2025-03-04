@@ -1,0 +1,169 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 90%;  /* Set the width to 90% of the viewport */
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    animation: backgroundAnimation 10s infinite alternate;
+}
+@keyframes backgroundAnimation {
+    0% { background-color: #fff; }
+    50% { background-color: #f0f8ff; }  /* Light blue */
+    100% { background-color: #fff; }
+}
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+h1:hover {
+    color: #555;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allow form boxes to wrap */
+}
+.form-box-column {
+    display: flex;
+    flex-direction: column;
+    width: 30%;  /* Set the width of the column */
+}
+.form-box {
+    width: 100%;  /* Make the form box fill the column */
+    padding: 20px;
+    background-color: #e3f2fd;  /* Light blue background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: backgroundAnimationSmall 10s infinite alternate;
+    margin-bottom: 20px; /* Add margin at the bottom */
+}
+@keyframes backgroundAnimationSmall {
+    0% { background-color: #e3f2fd; }
+    50% { background-color: #bbdefb; }  /* Slightly darker blue */
+    100% { background-color: #e3f2fd; }
+}
+.form-box-large {
+    width: 65%;  /* Make the form box larger */
+    padding: 30px;
+    background-color: #e8f5e9;  /* Light green background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: backgroundAnimationLarge 10s infinite alternate;
+    margin-bottom: 20px; /* Add margin at the bottom */
+}
+@keyframes backgroundAnimationLarge {
+    0% { background-color: #e8f5e9; }
+    50% { background-color: #c8e6c9; }  /* Slightly darker green */
+    100% { background-color: #e8f5e9; }
+}
+.form-box:hover,
+.form-box-large:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+.form-box h2 {
+    color: #555;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+.form-box h2:hover {
+    color: #777;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+label:hover {
+    color: #555;
+}
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.short-input {
+    width: 50%;  /* Adjust the width to make the input shorter */
+}
+button[type="submit"],
+.checkout-button {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+button[type="submit"]:hover,
+.checkout-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+table:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:hover td {
+    background-color: #f1f1f1;
+}
+.checkout-container {
+    margin-top: 20px;
+    text-align: right;
+}

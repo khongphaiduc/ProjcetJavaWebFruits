@@ -10,13 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../css/sigincss.css"/>
+     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/sigincss.css">
+
     </head>
   <div class="container">
         <h2>Đăng Ký Tài Khoản</h2>
-        <form action="registerServlet" method="post">
+        <form action="sigup" method="post">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="account" required>
 
             <label for="password">Mật khẩu:</label>
             <input type="password" id="password" name="password" required>
@@ -27,9 +28,12 @@
               <br>
               <button type="submit" style="background-color: #28a745">Đăng Ký</button>
             
-              <button type="button"  style="background-color: yellowgreen" onclick="window.location.href = '../login/loginuser.jsp'">Hủy</button>  
+           
 <!--     chuyển hướng đến form đăng nhập nếu người dùng Ấn hủy đăng ký tài khoảng mới -->
         </form>
+         <br>
+         <br>
+        <h2 style="color: #f06">${status}</h2>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
