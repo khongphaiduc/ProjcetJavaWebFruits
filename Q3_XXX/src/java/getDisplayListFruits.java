@@ -60,7 +60,7 @@ public class getDisplayListFruits extends HttpServlet {
             throws ServletException, IOException {
 
         mainlogic s = new mainlogic();
-        List<Fruits> listFruits = s.getListFruits();
+        List<Fruits> listFruits = s.getListFruitAndUrlImage();
         request.setAttribute("listFruits", listFruits);
         request.getRequestDispatcher("/conten/displayFruits.jsp").forward(request, response);
     }
@@ -77,7 +77,7 @@ public class getDisplayListFruits extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         mainlogic s = new mainlogic();
-        List<Fruits> listFruits = s.getListFruits();
+        List<Fruits> listFruits = s.getListFruitAndUrlImage();
         String search = request.getParameter("search");
         String option = request.getParameter("option");
         try {

@@ -41,6 +41,7 @@
                     <th>Stock</th>
                     <th>Origin</th>
                     <th>Country</th>
+                         <th>Ảnh</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +53,8 @@
                         <td>${s.stock}</td>
                         <td>${s.origin}</td>
                         <td>${s.country}</td>
+                       <td><img src="${s.fruitsImageUrl.url}" alt="Fruit Image" width="130" height="100"/></td>
+
                     </tr>
                 </c:forEach>
             </tbody>

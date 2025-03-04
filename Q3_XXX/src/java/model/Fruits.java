@@ -18,7 +18,9 @@ public class Fruits {
     String country;
     double sum;
     int soluong;
+    FruitImage fruitsImageUrl;
 
+     // lấy danh sách fruits k ảnh 
     public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country) {
         this.fruitsID = fruitsID;
         this.nameFuirt = nameFuirt;
@@ -28,6 +30,7 @@ public class Fruits {
         this.country = country;
     }
 
+    // lưu sản phẩm trong hóa đơn
     public Fruits(int fruitsID, String nameFuirt, double price, int soluong, String orgin, String country, double sum) {
         this.fruitsID = fruitsID;
         this.nameFuirt = nameFuirt;
@@ -38,6 +41,24 @@ public class Fruits {
         this.soluong = soluong;
     }
 
+    public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country,FruitImage fruitsImageUrl) {
+        this.fruitsID = fruitsID;
+        this.nameFuirt = nameFuirt;
+        this.price = price;
+        this.stock = stock;
+        this.origin = origin;
+        this.country = country;
+        this.fruitsImageUrl = fruitsImageUrl;
+    }
+
+    public FruitImage getFruitsImageUrl() {
+        return fruitsImageUrl;
+    }
+
+    public void setFruitsImageUrl(FruitImage fruitsImageUrl) {
+        this.fruitsImageUrl = fruitsImageUrl;
+    }
+    
     public int getSoluong() {
         return soluong;
     }

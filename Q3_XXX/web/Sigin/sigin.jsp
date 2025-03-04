@@ -10,11 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/sigincss.css">
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/css/sigincss.css">
 
     </head>
-  <div class="container">
+    <div class="container">
         <h2>Đăng Ký Tài Khoản</h2>
+        <audio autoplay loop>
+            <source src="<%= request.getContextPath() %>/audio/intro.mp3" type="audio/mp3">
+        </audio>
+
+      
+        
         <form action="sigup" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="account" required>
@@ -24,15 +30,15 @@
 
             <label for="confirmPassword">Nhập lại mật khẩu:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
-              <br>
-              <br>
-              <button type="submit" style="background-color: #28a745">Đăng Ký</button>
-            
-           
-<!--     chuyển hướng đến form đăng nhập nếu người dùng Ấn hủy đăng ký tài khoảng mới -->
+            <br>
+            <br>
+            <button type="submit" style="background-color: #28a745">Đăng Ký</button>
+
+
+            <!--     chuyển hướng đến form đăng nhập nếu người dùng Ấn hủy đăng ký tài khoảng mới -->
         </form>
-         <br>
-         <br>
+        <br>
+        <br>
         <h2 style="color: #f06">${status}</h2>
     </div>
     <script>
