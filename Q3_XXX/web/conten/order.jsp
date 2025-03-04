@@ -12,6 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ordercss.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- sử dụng bootstrap-->
+
     </head>
     <body>
         <div class="container">
@@ -20,6 +25,7 @@
                 <div class="form-box-column">
                     <div class="form-box" >
                         <h2>Add Product by ID</h2>
+                        <!--                        form 1 add sản phẩm -->
                         <form action="orders" method="get">
                             <label for="productID">Product ID:</label>
                             <input type="text" id="productID" name="productID" required>
@@ -29,7 +35,8 @@
                         </form>
                     </div>
                     <div class="form-box">
-                        <h2>Delete Product by ID</h2>
+                        <h2>Delete Product by Index</h2>
+                        <!--                        form 2 xóa sản phẩm theo index-->
                         <form action="orders" method="get">
                             <label for="deleteProductID">Product ID:</label>
                             <input type="text" id="deleteProductID" name="indexRemove" required >
@@ -39,47 +46,62 @@
                 </div>
                 <div class="form-box-large">
                     <h2>Product Information</h2>
-                    <form>
+                    <!--                    form 3 nhập thông tin khách hàng-->
+                    <form action="orders" method="post">
                         <label for="customerName">Customer Name:</label>
                         <input type="text" id="customerName" name="customerName" class="short-input" required>
                         <label for="customerPhone">Customer Phone:</label>
                         <input type="text" id="customerPhone" name="customerPhone" class="short-input" required>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>                    
+                                    <th>Price</th>
+                                    <th>Origin</th>
+                                    <th>Country</th>
+                                    <th>Quantity</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="s" items="${listOrder}">
+
+                                    <tr>
+                                        <td>${s.fruitsID}</td>                      
+                                        <td>${s.nameFuirt}</td>
+                                        <td>${s.price}</td>
+                                        <td>${s.origin}</td>
+                                        <td>${s.country}</td>
+                                        <td>${s.soluong}</td>
+                                        <td>${s.sum}</td>
+                                    </tr>
+
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+
+                        <div class="checkout-container">               
+                            <button  style="width: 200px" class="checkout-button">Xuất Hóa Đơn</button>              
+                        </div>
+
                     </form>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>                    
-                                <th>Price</th>
-                                <th>Origin</th>
-                                <th>Country</th>
-                                <th>Quantity</th>
-                                <th>Sum</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="s" items="${listOrder}">
-
-                                <tr>
-                                    <td>${s.fruitsID}</td>                      
-                                    <td>${s.nameFuirt}</td>
-                                    <td>${s.price}</td>
-                                    <td>${s.origin}</td>
-                                    <td>${s.country}</td>
-                                    <td>${s.soluong}</td>
-                                    <td>${s.sum}</td>
-                                </tr>
-
-                            </c:forEach>
-
-                        </tbody>
-                    </table>
+                    <h4>Số Tiền Cần Thanh Toán : ${itemMoney}K VND</h4>  
                 </div>
+
             </div>
-            <div class="checkout-container">
-                <button class="checkout-button">Proceed to Checkout</button>
-            </div>
+
+            <!--         form 4 xóa tất cả trong hóa đơn-->
+            <form  action="orders" method="post">
+                <input type="text" name="red" value="s"  style="display: none">
+                <button style="width: 200px ;background-color: #f3ec78 ;color: #4cae4c ;margin-right: 20px" class="checkout-button">Clean</button>
+            </form>
+
+
         </div>
     </body>
+
 </html>

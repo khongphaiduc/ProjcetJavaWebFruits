@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
-
 /**
  *
  * @author Admin
@@ -65,28 +64,43 @@ public class orders extends HttpServlet {
         String idproduct = request.getParameter("productID");
         String productQuantity = request.getParameter("productQuantity");
         String indexRemove = request.getParameter("indexRemove");
-        
+
         List<Fruits> listOrder = (List<Fruits>) seccion.getAttribute("listOrder");
         if (listOrder == null) {
             listOrder = new ArrayList<>();
         }
+
+        int totalMoney = 0;
         try {
-            if ( indexRemove!=null) {
+
+            if (indexRemove != null) {
                 int indexR = Integer.parseInt(indexRemove);
                 listOrder.remove(indexR);               // xóa theo index 
-              
+                // tính tiền 
+                for (int i = 0; i < listOrder.size(); i++) {
+                    totalMoney += listOrder.get(i).getSum();
+                }
+                request.setAttribute("itemMoney", totalMoney);
+                //  
                 seccion.setAttribute("listOrder", listOrder);
                 request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
-                return;
-            }else{
+
+            } else {
                 int number = Integer.parseInt(productQuantity);
                 listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
 
+                // tính tiền 
+                for (int i = 0; i < listOrder.size(); i++) {
+                    totalMoney += listOrder.get(i).getSum();
+                }
+                request.setAttribute("itemMoney", totalMoney);
+                //
+
                 seccion.setAttribute("listOrder", listOrder);
                 request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
-                return ;
+
             }
-         
+
         } catch (Exception t) {
             t.printStackTrace();
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
@@ -104,7 +118,32 @@ public class orders extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String red = request.getParameter("red");
+        HttpSession session = request.getSession();
+
+        String nameCustomer = request.getParameter("customerName");
+        String phone = request.getParameter("phone");
+        try {
+            
+            if (red != null) {
+                session.invalidate();
+                request.setAttribute("itemMoney", "0");
+                request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+                return;
+            }
+
+            createFileOrder t = new createFileOrder();
+            t.writeToFile(createFileOrder.getCurrentTime(), nameCustomer); // ghi nội dung hóa đơn vào file 
+               session.invalidate();     // xuất hóa đơn xong thì clean sesion 
+            request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+            
+            
+            
+
+        } catch (Exception s) {
+            request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+        }
     }
 
     /**

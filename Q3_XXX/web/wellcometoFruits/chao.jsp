@@ -1,9 +1,3 @@
-<%-- 
-    Document   : chao
-    Created on : Mar 4, 2025, 5:38:54 PM
-    Author     : Admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +14,7 @@
                     <p class="intro-text left">Hãy Ăn Theo Cách Của Bạn</p>
                     <p class="intro-text right">Tính Tiền Theo Cách Của Tôi</p>
                 </div>
-
-                <li> <button  href="#" class="start-button"  type="button" onclick="window.open('<%= request.getContextPath() %>/homes', '_blank')">Get Started</button></li>
+                <button class="start-button" type="button" onclick="window.open('<%= request.getContextPath() %>/homes', '_self')">Get Started</button>
             </div>
         </div>
         <div id="stars"></div>
@@ -36,4 +29,4 @@
             }
         </script>
     </body>
-</html
+</html>

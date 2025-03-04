@@ -21,7 +21,7 @@
 
     <header class="main-header">
         <div class="container">
-            <h1 class="store-name">Fresh Fruits Store</h1>
+            <h1 style="color: white;font-family: cursive" class="store-name">Fresh Fruits Store</h1>
             <p class="tagline">Phạm Trung Đức</p>
             <nav class="main-nav">
                 <ul>

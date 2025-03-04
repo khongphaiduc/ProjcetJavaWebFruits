@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/logincss.css">
 
     </head>
-    <body>
+   <body>
         <h1 class="welcome-text">Welcome to Fruit Management</h1>
         <section>
             <form action="homes" method="post">
@@ -25,7 +25,7 @@
                 <button type="submit">Login</button>
                 <br>
                 <br>
-      <button type="button" onclick="window.open('<%= request.getContextPath() %>/sigup', '_blank')">Đăng Ký</button>
+                <button type="button" onclick="window.open('<%= request.getContextPath() %>/sigup', '_blank')">Đăng Ký</button>
                 <div class="register">
                     <p style="color: red">${status}</p>
                 </div>
@@ -51,4 +51,5 @@
             });
         </script>
     </body>
-</html>
+    
+    </html>
