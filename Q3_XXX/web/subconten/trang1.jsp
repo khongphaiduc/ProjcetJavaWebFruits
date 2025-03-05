@@ -1,14 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%-- 
+    Document   : trang1
+    Created on : Mar 6, 2025, 1:00:37 AM
+    Author     : Admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Thống Kê Doanh Thu Ngày</title>
-        <link rel="stylesheet" href="<%= request.getContextPath() %>/css/trangchucss.css">
-      
+        <title>JSP Page</title>
+          <link rel="stylesheet" href="<%= request.getContextPath() %>/subconten/trang1css.css">
     </head>
-    <body>
-        <h1 style="display: flex;justify-content: ">Top những sản phẩm bán chạy nhất</h1>
+        <body>
+        <h1 style="display: flex;justify-content:center ">Top những sản phẩm bán chạy nhất</h1>
         <div class="container">
            
             <div class="product">

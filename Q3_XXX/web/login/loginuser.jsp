@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,22 +5,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/logincss.css">
-
     </head>
-   <body>
+    <body>
         <h1 class="welcome-text">Welcome to Fruit Management</h1>
         <section>
             <form action="homes" method="post">
                 <h1>Login</h1>
                 <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
+                 
                     Account <input type="email" required placeholder=" " name="account">
                 </div>
                 <div class="inputbox">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
+                  
                     Password <input type="password" required name="password">
                 </div>
-
                 <button type="submit">Login</button>
                 <br>
                 <br>
@@ -51,5 +48,4 @@
             });
         </script>
     </body>
-    
-    </html>
+</html>

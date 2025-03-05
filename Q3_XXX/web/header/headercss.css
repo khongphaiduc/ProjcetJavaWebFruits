@@ -1,0 +1,60 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 6, 2025, 1:08:13 AM
+    Author     : Admin
+*/
+
+ body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background: linear-gradient(to right, #5cb85c, #4cae4c);
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+            color: white;
+            font-size: 28px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+        .nav button:hover {
+            text-decoration: underline;
+        }
+        .weather {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .weather img {
+            width: 20px;
+            margin-left: 5px;
+        }
+    

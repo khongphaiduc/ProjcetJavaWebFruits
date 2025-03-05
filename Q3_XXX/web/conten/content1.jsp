@@ -12,15 +12,10 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/csscontent1.css">
     </head>
-    <body>
-        <%@include file="../conten/header.jsp" %>
-<!--        <audio autoplay loop>
-            <source src="<%= request.getContextPath() %>/audio/bai1.mp3" type="audio/mp3">
-        </audio>-->
-       
-        <%@include file="../conten/footer.jsp" %>>
-
+    <body>     
+        <%@include file="../header/header.jsp" %>
+        
+        <%@include file="../subconten/trang1.jsp" %>
     </body>
-</body>
 
 </html>
