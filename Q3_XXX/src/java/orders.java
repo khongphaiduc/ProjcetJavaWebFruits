@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
+
 /**
  *
  * @author Admin
@@ -123,9 +124,10 @@ public class orders extends HttpServlet {
         HttpSession session = request.getSession();
 
         String nameCustomer = request.getParameter("customerName");
-        String phone = request.getParameter("phone");
+        List<Fruits> list = (List<Fruits>) session.getAttribute("listOrder");
+        String phone = request.getParameter("customerPhone");
         try {
-            
+
             if (red != null) {
                 session.invalidate();
                 request.setAttribute("itemMoney", "0");
@@ -134,12 +136,14 @@ public class orders extends HttpServlet {
             }
 
             createFileOrder t = new createFileOrder();
-            t.writeToFile(createFileOrder.getCurrentTime(), nameCustomer); // ghi nội dung hóa đơn vào file 
-               session.invalidate();     // xuất hóa đơn xong thì clean sesion 
+            logicOrder or = new logicOrder();
+
+            String content = or.ghicontenhoadon(nameCustomer, phone, list);
+            t.writeToFile(createFileOrder.getCurrentTime(), content); // ghi nội dung hóa đơn vào file 
+
+
+            session.invalidate();     // xuất hóa đơn xong thì clean sesion 
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
-            
-            
-            
 
         } catch (Exception s) {
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);

@@ -14,9 +14,9 @@
     </head>
     <body>
         <%@include file="../conten/header.jsp" %>
-        <audio autoplay loop>
+<!--        <audio autoplay loop>
             <source src="<%= request.getContextPath() %>/audio/bai1.mp3" type="audio/mp3">
-        </audio>
+        </audio>-->
        
         <%@include file="../conten/footer.jsp" %>>
 

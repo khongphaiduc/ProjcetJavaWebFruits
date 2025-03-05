@@ -49,9 +49,9 @@
                     <!--                    form 3 nhập thông tin khách hàng-->
                     <form action="orders" method="post">
                         <label for="customerName">Customer Name:</label>
-                        <input type="text" id="customerName" name="customerName" class="short-input" required>
+                        <input type="text" id="customerName" name="customerName" class="short-input" required >
                         <label for="customerPhone">Customer Phone:</label>
-                        <input type="text" id="customerPhone" name="customerPhone" class="short-input" required>
+                        <input type="text" id="customerPhone" name="customerPhone" class="short-input"  required>
 
                         <table>
                             <thead>

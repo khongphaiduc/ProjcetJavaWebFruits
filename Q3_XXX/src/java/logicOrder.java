@@ -50,6 +50,44 @@ public class logicOrder extends DBContext {
         return null;
     }
 
+    // ghi hóa đơn vào stringbuilder
+    public String ghicontenhoadon(String name, String phone, List<Fruits> list) {
+        StringBuilder order = new StringBuilder();
+
+        order.append("--------------------------- HÓA ĐƠN THANH TOÁN Fruits ----------------------------\n");
+        order.append("Mã Hóa Đơn: " + createFileOrder.getCurrentTime() + "\n");
+        order.append("Tên khách hàng: " + name + "\n");
+        order.append("Số điện thoại: " + phone + "\n");
+        order.append("Thời gian mua hàng: " + createFileOrder.getCurrentTime() + "\n");
+        order.append("__________________________________________________________________________________________________________________________________________________________\n");
+
+        order.append(String.format("|%-20s |%-20s |%-20s |%-20s |%-20s |%-20s |%-20s |\n",
+                "ID", "Product Name", "Price", "Origin", "Country", "Quantity", "Tổng"));
+        order.append("__________________________________________________________________________________________________________________________________________________________\n");
+
+        for (Fruits fruit : list) {
+            order.append(String.format("|%-20s |%-20s |%-20s |%-20s |%-20s |%-20d |%-20.2f |\n",
+                    fruit.getFruitsID(), fruit.getNameFuirt(), fruit.getPrice(),
+                    fruit.getOrigin(), fruit.getCountry(), fruit.getSoluong(), fruit.getSum()));
+        }
+
+        order.append("__________________________________________________________________________________________________________________________________________________________\n");
+
+        double sumMoney = 0;
+        for (Fruits s : list) {
+            sumMoney += s.getSum();
+        }
+        order.append("\n");
+        order.append("\n");
+        order.append("\n");
+        order.append("\n");
+
+        order.append("Tổng số tiền cần thanh toán là: " + sumMoney +"K VND"+ "\n");
+        order.append("Xin cảm ơn quý khách đã ủng hộ dịch vụ của chúng tôi.\n");
+
+        return order.toString();
+    }
+
     public static void main(String[] args) {
         logicOrder s = new logicOrder();
 

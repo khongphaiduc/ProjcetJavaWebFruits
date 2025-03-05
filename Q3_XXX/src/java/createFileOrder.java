@@ -7,18 +7,20 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class createFileOrder {
 
-    
-     public static String getCurrentTime() {
+    public static String getCurrentTime() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         return now.format(formatter);
     }
-    
+
     public static void writeToFile(String fileName, String content) {
-        String storagpath = "D:\\OrderFruis";
+        String storagpath = "D:\\OrderFruits";  // Sửa lỗi đánh vần "Fruis" -> "Fruits"
+
         try {
             // Tạo thư mục nếu chưa tồn tại
             File directory = new File(storagpath);
@@ -26,21 +28,23 @@ public class createFileOrder {
                 directory.mkdirs();
             }
 
-            // Tạo tệp tin và ghi nội dung
+            // Ghi file với UTF-8
             File file = new File(storagpath + File.separator + fileName);
-            FileWriter writer = new FileWriter(file);
-            writer.write(content);
-            writer.close();
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(file), StandardCharsets.UTF_8))) {
+                writer.write(content);
+            }
 
             System.out.println("Ghi vào tệp thành công: " + file.getAbsolutePath());
         } catch (IOException e) {
             System.out.println("Lỗi khi ghi tệp: " + e.getMessage());
         }
     }
-  
-    
-    // tìm file và đọc nội dung
-    public static String findAndReadFileContent(String fileName) {
+
+
+
+// tìm file và đọc nội dung
+public static String findAndReadFileContent(String fileName) {
         String storagpath = "D:\\OrderFruis";
         File directory = new File(storagpath);
 
@@ -50,7 +54,7 @@ public class createFileOrder {
             return null;
         }
 
-        // Lấy danh sách các file trong thư mục
+        // Lấy danh sách các file trong thư mụcc
         File[] files = directory.listFiles();
 
         if (files != null) {
@@ -71,7 +75,8 @@ public class createFileOrder {
         System.out.println("Không tìm thấy tệp: " + fileName);
         return null;
     }
-
+    
+    
     public static void main(String[] args) {
         // Đường dẫn thư mục
         String folderPath = "C:\\Users\\Public\\MyFiles";  // Thay đổi đường dẫn theo ý muốn
