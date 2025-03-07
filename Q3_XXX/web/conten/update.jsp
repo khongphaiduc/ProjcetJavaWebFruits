@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cập Nhật Sản Phẩm</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/updatecss.css">
     </head>
     <body>

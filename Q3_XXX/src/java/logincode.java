@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 public class logincode extends DBContext {
@@ -69,7 +72,6 @@ public class logincode extends DBContext {
         return false;
     }
 
-    
     // phương thức đăng ký tài khoảng mới 
     public boolean signUp(String account, String password) {
         logincode o = new logincode();
@@ -90,10 +92,8 @@ public class logincode extends DBContext {
 
     public static void main(String[] args) {
         logincode o = new logincode();
-       List<Account> list = o.getListAccount();
-       
+        String formattedDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(formattedDate);
 
-       
-       
     }
 }

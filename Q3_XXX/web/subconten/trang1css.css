@@ -1,11 +1,4 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Mar 6, 2025, 1:01:15 AM
-    Author     : Admin
-*/
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -41,7 +34,7 @@ body {
 }
 
 .product img {
-    max-width: 100%;
+    max-width: 70%;
     border-radius: 10px;
 }
 

@@ -1,0 +1,115 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+}
+
+.main-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.revenue-report, .product-section, .today-report {
+    margin-bottom: 30px;
+}
+
+.revenue-report h2, .product-section h2, .today-report h2 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px; /* Adjust height to make the chart more compact */
+}
+
+.today-report {
+    background: linear-gradient(to right, #2196F3, #21CBF3);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.today-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.today-details p {
+    color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    font-weight: bold;
+    animation: slideIn 1s ease-in-out;
+}
+
+.today-details p span {
+    color: #ffeb3b;
+    font-size: 1.8em;
+}
+
+.product-section h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.product {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: calc(33.333% - 20px); /* 3 items per row with 20px gap */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product h2 {
+    color: #4CAF50;
+    margin-top: 10px;
+}
+
+.product p {
+    color: #333;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}

@@ -1,12 +1,13 @@
 
 import dal.DBContext;
+
 import model.Fruits;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.CallableStatement;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +24,7 @@ public class logicOrder extends DBContext {
         return soluong * price;
     }
 
-    // thêm vào hóa đơn
+    // thêm vào list dỏ hàng
     public Fruits getFruitbyID(String id, int number) {
         logicOrder o = new logicOrder();
         List<Fruits> list = new ArrayList<>();
@@ -48,6 +49,28 @@ public class logicOrder extends DBContext {
             t.printStackTrace();
         }
         return null;
+    }
+
+    // kiểm tra số lượng trong kho trước khi thêm vào dỏ hàng 
+    public boolean checkStockByID(String id, int number) {
+        String sql = "SELECT Stock FROM [dbo].[Fruits] WHERE FruitID = ?";
+
+        try {
+            PreparedStatement push = connection.prepareStatement(sql);
+            push.setString(1, id); // Sửa lỗi setInt thành setString
+
+            ResultSet rs = push.executeQuery();
+
+            if (rs.next()) { // Nếu có dữ liệu trả về
+                int stock = rs.getInt("Stock");
+                return stock >= number; // Kiểm tra số lượng tồn kho
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false; 
     }
 
     // ghi hóa đơn vào stringbuilder
@@ -82,16 +105,74 @@ public class logicOrder extends DBContext {
         order.append("\n");
         order.append("\n");
 
-        order.append("Tổng số tiền cần thanh toán là: " + sumMoney +"K VND"+ "\n");
+        order.append("Tổng số tiền cần thanh toán là: " + sumMoney + "K VND" + "\n");
         order.append("Xin cảm ơn quý khách đã ủng hộ dịch vụ của chúng tôi.\n");
 
         return order.toString();
     }
 
+    // thêm thông tin khách hàng vào hóa đơn
+    public int addOrderSInDataBase(String nameCustomer, String date, double totalMoney) {
+        try {
+            String sql = "INSERT INTO [dbo].[Orders] "
+                    + "([CustomerName], [OrderDate], [TotalAmount]) "
+                    + "VALUES (?,?,?)";
+
+            // Chuẩn bị statement với tùy chọn trả về generated keys
+            PreparedStatement push = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            push.setString(1, nameCustomer);
+            push.setString(2, date);
+            push.setDouble(3, totalMoney);
+
+            // Thực thi câu lệnh INSERT
+            push.executeUpdate();
+
+            // Lấy kết quả generated keys
+            ResultSet rs = push.getGeneratedKeys();
+            int newOrderID = -1;
+
+            if (rs.next()) {
+                newOrderID = rs.getInt(1); // cột đầu tiên là ID mới
+                System.out.println("Inserted Order ID: " + newOrderID);
+            }
+
+            return newOrderID;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    //add fruits in  Detail Order 
+    public void addDetailOrder(int orderID, int fruitID, int quality, double price) {
+
+        String sql = "INSERT INTO [dbo].[OrderDetails]\n"
+                + "           ([OrderID]\n"
+                + "           ,[FruitID]\n"
+                + "           ,[Quantity]\n"
+                + "           ,[Price])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+
+        try {
+            PreparedStatement push = connection.prepareStatement(sql);
+            push.setInt(1, orderID);
+            push.setInt(2, fruitID);
+            push.setInt(3, quality);
+            push.setDouble(4, price);
+            push.executeUpdate();
+            System.out.println("thêm thành công");
+        } catch (Exception t) {
+
+        }
+    }
+
     public static void main(String[] args) {
         logicOrder s = new logicOrder();
 
-        System.out.println(s.getFruitbyID("2", 21));
+//        System.out.println(s.addOrderSInDataBase("quynh anh", "2025/6/3", 9.9));
+        System.out.println(s.checkStockByID("127", 10));
 
     }
 }

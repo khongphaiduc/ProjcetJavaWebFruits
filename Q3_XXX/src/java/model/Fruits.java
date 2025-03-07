@@ -19,8 +19,17 @@ public class Fruits {
     double sum;
     int soluong;
     FruitImage fruitsImageUrl;
+    String pathURL;
 
-     // lấy danh sách fruits k ảnh 
+    public String getPathURL() {
+        return pathURL;
+    }
+
+    public void setPathURL(String pathURL) {
+        this.pathURL = pathURL;
+    }
+
+    // lấy danh sách fruits k ảnh 
     public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country) {
         this.fruitsID = fruitsID;
         this.nameFuirt = nameFuirt;
@@ -41,7 +50,8 @@ public class Fruits {
         this.soluong = soluong;
     }
 
-    public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country,FruitImage fruitsImageUrl) {
+    // lấy danh sách fruits kèm ảnh 
+    public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country, FruitImage fruitsImageUrl) {
         this.fruitsID = fruitsID;
         this.nameFuirt = nameFuirt;
         this.price = price;
@@ -49,6 +59,13 @@ public class Fruits {
         this.origin = origin;
         this.country = country;
         this.fruitsImageUrl = fruitsImageUrl;
+    }
+   // lấy top fruit bán chạy 
+    public Fruits(int fruitsID, String nameFuirt, double price,String pathImage) {
+        this.fruitsID = fruitsID;
+        this.nameFuirt = nameFuirt;
+        this.price = price;
+        this.pathURL=pathImage;
     }
 
     public FruitImage getFruitsImageUrl() {
@@ -58,7 +75,7 @@ public class Fruits {
     public void setFruitsImageUrl(FruitImage fruitsImageUrl) {
         this.fruitsImageUrl = fruitsImageUrl;
     }
-    
+
     public int getSoluong() {
         return soluong;
     }
@@ -125,7 +142,11 @@ public class Fruits {
 
     @Override
     public String toString() {
-        return "Fruits{" + "fruitsID=" + fruitsID + ", nameFuirt=" + nameFuirt + ", price=" + price + ", origin=" + origin + ", country=" + country + ", sum=" + sum + ", soluong=" + soluong + '}';
+        return "Fruits{" + "fruitsID=" + fruitsID + ", nameFuirt=" + nameFuirt + ", price=" + price + ", pathURL=" + pathURL + '}';
     }
+
+
+
+   
 
 }

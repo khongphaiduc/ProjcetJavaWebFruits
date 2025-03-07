@@ -13,19 +13,15 @@
         <link rel="stylesheet" href="<%= request.getContextPath() %>/header/headercss.css">
     </head>
     <body>
-        <div class="header">
-            <div class="weather">
-                Hà Nội 22.0°C <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Weather">
-            </div>
+        <div class="header">           
             <h1>Fresh Fruits Store</h1>
             <div class="nav">
-                <button type="button">Trang Chủ</button>
-                <button type="button" onclick="window.open('<%= request.getContextPath() %>/getDisplayListFruits', '_blank')">List Sản Phẩm</button>
+                <button type="button">Thống Kê</button>
+                <button type="button" onclick="window.open('<%= request.getContextPath() %>/getDisplayListFruits', '_blank')">Kho Sản Phẩm</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/insertFruits', '_blank')">Nhập Hàng</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/updateFruits', '_blank')">Update</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/orders', '_blank')">Hóa Đơn</button>
             </div>
         </div>
-
     </body>
 </html>

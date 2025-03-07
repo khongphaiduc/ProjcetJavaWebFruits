@@ -71,7 +71,7 @@ public class updateFruits extends HttpServlet {
         if (s.updateFruit(id, name, price, stock, origin, country)) {
             String statuc = "Update thành công";
             request.setAttribute("status", statuc);
-            request.getRequestDispatcher("/conten/update.jsp").forward(request, response);
+            request.getRequestDispatcher("/conten/displayFruits.jsp").forward(request, response);
         } else {
             String statuc = "Update Fail";
             request.setAttribute("status", statuc);

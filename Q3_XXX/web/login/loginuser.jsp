@@ -12,11 +12,11 @@
             <form action="homes" method="post">
                 <h1>Login</h1>
                 <div class="inputbox">
-                 
+
                     Account <input type="email" required placeholder=" " name="account">
                 </div>
                 <div class="inputbox">
-                  
+
                     Password <input type="password" required name="password">
                 </div>
                 <button type="submit">Login</button>

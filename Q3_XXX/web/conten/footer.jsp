@@ -14,13 +14,15 @@
     </head>
 <body>
     <footer>      
+        <div class="footer-container">
             <div class="footer-column">
-                <h3>Developer :Phạm Trung Đức</h3>
+                <h3>Phạm Trung Đức</h3>
                 <p>Email: ptrungduc1011@gmail.com</p>   
-                 <p>HE187263</p>
+                <p>HE187263</p>
             </div>      
+        </div>
         <div class="footer-bottom">
-            <p>&copy;Ngày Hoàn Thiện 3/3/2025</p>
+            <p>&copy; 2025 of Pham Trung Duc</p>
         </div>
     </footer>
 </body>

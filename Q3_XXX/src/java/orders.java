@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
+import java.time.LocalDate;
 
 /**
  *
@@ -72,6 +73,7 @@ public class orders extends HttpServlet {
         }
 
         int totalMoney = 0;
+      
         try {
 
             if (indexRemove != null) {
@@ -88,18 +90,29 @@ public class orders extends HttpServlet {
 
             } else {
                 int number = Integer.parseInt(productQuantity);
-                listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
 
-                // tính tiền 
-                for (int i = 0; i < listOrder.size(); i++) {
-                    totalMoney += listOrder.get(i).getSum();
+                logicOrder v = new logicOrder();
+                // kiểm tra số lượng trong kho trước khi thêm vào hóa đơn
+                if (v.checkStockByID(idproduct, number)) {
+                    
+                    listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
+
+                    // tính tiền 
+                    for (int i = 0; i < listOrder.size(); i++) {
+                        totalMoney += listOrder.get(i).getSum();
+                    }
+
+                    request.setAttribute("itemMoney", totalMoney);
+                    seccion.setAttribute("listOrder", listOrder);
+                    request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+                } else {
+                    
+                    String statusStock = "Thông báo :Số lượng sản phẩm trong kho không đủ vui lòng kiểm tra lại";
+                    request.setAttribute("itemMoney", totalMoney);
+                    seccion.setAttribute("listOrder", listOrder);
+                    request.setAttribute("statusStock", statusStock);
+                    request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
                 }
-                request.setAttribute("itemMoney", totalMoney);
-                //
-
-                seccion.setAttribute("listOrder", listOrder);
-                request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
-
             }
 
         } catch (Exception t) {
@@ -119,13 +132,27 @@ public class orders extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+                                                                             
         String red = request.getParameter("red");
         HttpSession session = request.getSession();
 
         String nameCustomer = request.getParameter("customerName");
         List<Fruits> list = (List<Fruits>) session.getAttribute("listOrder");
         String phone = request.getParameter("customerPhone");
+        if (list == null) {
+            String xuat = "Trạng Thái: Đơn hàng rỗng";
+            request.setAttribute("xuat", xuat);
+            request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+            return;
+        }    
+        
+        double totalMoney = 0;
+
+        for (var l : list) {
+            totalMoney += l.getSum();
+        }
+
+        LocalDate today = LocalDate.now();
         try {
 
             if (red != null) {
@@ -135,12 +162,24 @@ public class orders extends HttpServlet {
                 return;
             }
 
+            // xử lý quá trình 
+            // lấy danh sách id trong list (session)
+            //lấy tổng tiền hóa đơn (totalMoney)
+            // lấy số lượng từng sản phẩm
+            // lấy giá của từng sản phẩm
+            logicOrder a = new logicOrder();
+            int idOrder = a.addOrderSInDataBase(nameCustomer, today.toString(), totalMoney); // thêm thông tin người dùng vào order
+
+            // thêm các sản phẩm vào Table detailOrder trong  db
+            for (var y : list) {
+                a.addDetailOrder(idOrder, y.getFruitsID(), y.getSoluong(), y.getPrice());
+            }
+
             createFileOrder t = new createFileOrder();
             logicOrder or = new logicOrder();
 
             String content = or.ghicontenhoadon(nameCustomer, phone, list);
             t.writeToFile(createFileOrder.getCurrentTime(), content); // ghi nội dung hóa đơn vào file 
-
 
             session.invalidate();     // xuất hóa đơn xong thì clean sesion 
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);

@@ -35,29 +35,12 @@ public class homes extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/login/loginuser.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,7 +48,8 @@ public class homes extends HttpServlet {
         String password = request.getParameter("password");
         logincode s = new logincode();
         if (s.login(acoount, password)) {
-            request.getRequestDispatcher("/conten/content1.jsp").forward(request, response);
+//            request.getRequestDispatcher("/conten/content1.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/statistic");
             return;
         } else {
             String status = "Tài Khoảng hoặc mật khẩu không chính xác";
