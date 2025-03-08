@@ -138,7 +138,7 @@ public class orders extends HttpServlet {
 
         String nameCustomer = request.getParameter("customerName");
         List<Fruits> list = (List<Fruits>) session.getAttribute("listOrder");
-        String phone = request.getParameter("customerPhone");
+    
         if (list == null) {
             String xuat = "Trạng Thái: Đơn hàng rỗng";
             request.setAttribute("xuat", xuat);
@@ -168,7 +168,7 @@ public class orders extends HttpServlet {
             // lấy số lượng từng sản phẩm
             // lấy giá của từng sản phẩm
             logicOrder a = new logicOrder();
-            int idOrder = a.addOrderSInDataBase(nameCustomer, today.toString(), totalMoney); // thêm thông tin người dùng vào order
+            int idOrder = a.addOrderSInDataBase(nameCustomer, today.toString(), totalMoney); // thêm thông tin người dùng vào table order
 
             // thêm các sản phẩm vào Table detailOrder trong  db
             for (var y : list) {
@@ -178,7 +178,7 @@ public class orders extends HttpServlet {
             createFileOrder t = new createFileOrder();
             logicOrder or = new logicOrder();
 
-            String content = or.ghicontenhoadon(nameCustomer, phone, list);
+            String content = or.ghicontenhoadon(nameCustomer, "0/0/0", list);
             t.writeToFile(createFileOrder.getCurrentTime(), content); // ghi nội dung hóa đơn vào file 
 
             session.invalidate();     // xuất hóa đơn xong thì clean sesion 
@@ -189,14 +189,10 @@ public class orders extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+  
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

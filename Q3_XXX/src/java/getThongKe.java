@@ -30,7 +30,7 @@ public class getThongKe extends DBContext {
         return "0";
     }
 
-    // thống kê số lượng sản phẩm đã bán ra trong 1 ngày cụ thể 
+    // thống kê tổng số lượng sản phẩm đã bán ra trong 1 ngày cụ thể 
     public String getStatisticNumberOfProduct(String date) {
 
         try {
@@ -52,62 +52,6 @@ public class getThongKe extends DBContext {
             s.printStackTrace();
         }
         return "0";
-    }
-
-    // lấy id của  top 9 sản phẩm bán chạy nhất
-    public List<String> getIDTop9ProductBanChayNhat() {
-        List<String> list = new ArrayList<>();
-        try {
-            String sql = "select Top(4)  s1.Name,s1.FruitID,s1.Price,s1.Country , sum(s2.Quantity) as Soluongdaban \n"
-                    + "from [dbo].[Fruits]s1\n"
-                    + "join [dbo].[OrderDetails]s2 on s1.FruitID=s2.FruitID\n"
-                    + "group by  s1.Name,s1.FruitID,s1.Price,s1.Country\n"
-                    + "order by Soluongdaban desc";
-
-            PreparedStatement push = connection.prepareStatement(sql);
-
-            ResultSet rs = push.executeQuery();
-
-            while (rs.next()) {
-                list.add(rs.getString("FruitID"));
-            }
-            return list;
-        } catch (Exception s) {
-
-        }
-        return null;
-    }
-
-    // lấy path image theo id
-    public Fruits getTopFruit(String id) {
-        String sql = "select s1.FruitID,s1.Name,s1.Price,s2.ImageURL\n"
-                + "from [dbo].[Fruits]s1 \n"
-                + "join [dbo].[FruitImages]s2  on s1.FruitID=s2.FruitID\n"
-                + "where s1.FruitID=?";
-        try {
-            PreparedStatement push = connection.prepareCall(sql);
-            push.setString(1, id);
-            ResultSet rs = push.executeQuery();
-
-            while (rs.next()) {
-                return new Fruits(rs.getInt("FruitID"), rs.getString("Name"), rs.getDouble("price"), rs.getString("ImageURL"));
-            }
-
-        } catch (Exception c) {
-            c.printStackTrace();
-
-        }
-        return null;
-    }
-
-    // kết hợp 2 phương thức trên để trả về list đối tượng Fruit có số lượng bán nhiều nhất và có path image
-    public List<Fruits> getIntoTOp9Product(List<String> listID) {
-        getThongKe t = new getThongKe();
-        List<Fruits> list = new ArrayList<>();
-        for (int i = 0; i < listID.size(); i++) {
-            list.add(t.getTopFruit(listID.get(i)));
-        }
-        return list;
     }
 
     // thống kê doanh thu 3 ngày gần nhất 
@@ -134,10 +78,91 @@ public class getThongKe extends DBContext {
         return null;
     }
 
+    // lấy top 4 sản phẩm bán chạy nhất sử dụng cte của sql 
+    public List<Fruits> getTop4BestSaleOfFruit() {
+        List<Fruits> list = new ArrayList<>();
+        try {
+
+            String sql = "with findTotalNumber as (\n"
+                    + "select  s1.FruitID,s2.Name ,sum(s1.Quantity) as result\n"
+                    + "from [dbo].[OrderDetails]s1\n"
+                    + "join[dbo].[Fruits] s2 on s1.FruitID=s2.FruitID\n"
+                    + "group by s1.FruitID,s2.Name\n"
+                    + "),\n"
+                    + "  laypathImagegsanphamdaban as (\n"
+                    + "select s1.FruitID,s1.Name,s1.Price,s2.ImageURL\n"
+                    + "from [dbo].[Fruits]s1\n"
+                    + "join [dbo].[FruitImages]s2 on s1.FruitID=s2.FruitID\n"
+                    + ")\n"
+                    + "\n"
+                    + "select top(4) s1.FruitID,s1.Name,s2.Price,s1.result,s2.ImageURL\n"
+                    + "from  findTotalNumber s1 \n"
+                    + "join  laypathImagegsanphamdaban s2 on s1.FruitID=s2.FruitID\n"
+                    + "order by s1.result desc";
+
+            PreparedStatement push = connection.prepareStatement(sql);
+            ResultSet rs = push.executeQuery();
+            while (rs.next()) {
+
+                list.add(new Fruits(rs.getInt("FruitID"), rs.getString("Name"), rs.getDouble("Price"), rs.getString("ImageURL"), rs.getInt("result")));
+
+            }
+        } catch (Exception v) {
+            v.printStackTrace();
+        }
+        return list;
+    }
+
+    // lấy các sản phầm còn số lượng dưới 10
+    public List<Fruits> getStatusStore() {
+
+        List<Fruits> list = new ArrayList<>();
+        String sql = "select s1.FruitID,s1. Name,s1.Stock\n"
+                + "from [dbo].[Fruits]s1\n"
+                + "where s1.Stock<=10 and s1.Stock>0"
+                + "order by s1.Stock asc";
+
+        try {
+            PreparedStatement push = connection.prepareStatement(sql);
+            ResultSet rs = push.executeQuery();
+
+            while (rs.next()) {
+                list.add(new Fruits(rs.getInt("FruitID"), rs.getString("Name"), rs.getInt("Stock")));
+            }
+
+        } catch (Exception k) {
+            k.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<Fruits> getProductStock() {
+
+        List<Fruits> list = new ArrayList<>();
+        String sql = "select s1.FruitID,s1. Name,s1.Stock\n"
+                + "from [dbo].[Fruits]s1\n"
+                + "where s1.Stock=0";
+
+        try {
+            PreparedStatement push = connection.prepareStatement(sql);
+            ResultSet rs = push.executeQuery();
+
+            while (rs.next()) {
+                list.add(new Fruits(rs.getInt("FruitID"), rs.getString("Name"), rs.getInt("Stock")));
+            }
+
+        } catch (Exception k) {
+            k.printStackTrace();
+        }
+
+        return list;
+    }
+
     public static void main(String[] args) {
         getThongKe s = new getThongKe();
 
-        System.out.println(s.getStatisticProfix());
+        System.out.println(s.getProductStock());
     }
 
 }

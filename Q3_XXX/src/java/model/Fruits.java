@@ -21,6 +21,8 @@ public class Fruits {
     FruitImage fruitsImageUrl;
     String pathURL;
 
+    int quantity;
+
     public String getPathURL() {
         return pathURL;
     }
@@ -50,6 +52,14 @@ public class Fruits {
         this.soluong = soluong;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     // lấy danh sách fruits kèm ảnh 
     public Fruits(int fruitsID, String nameFuirt, double price, int stock, String origin, String country, FruitImage fruitsImageUrl) {
         this.fruitsID = fruitsID;
@@ -60,14 +70,31 @@ public class Fruits {
         this.country = country;
         this.fruitsImageUrl = fruitsImageUrl;
     }
-   // lấy top fruit bán chạy 
-    public Fruits(int fruitsID, String nameFuirt, double price,String pathImage) {
+    // lấy top fruit bán chạy 
+
+    public Fruits(int fruitsID, String nameFuirt, double price, String pathImage) {
         this.fruitsID = fruitsID;
         this.nameFuirt = nameFuirt;
         this.price = price;
-        this.pathURL=pathImage;
+        this.pathURL = pathImage;
+
     }
 
+    public Fruits(int fruitsID, String nameFuirt, double price, String pathImage, int quantity) {
+        this.fruitsID = fruitsID;
+        this.nameFuirt = nameFuirt;
+        this.price = price;
+        this.pathURL = pathImage;
+        this.quantity = quantity;
+    }
+
+    
+    
+    public Fruits(int fruitsID, String nameFuirt,int stock) {
+        this.fruitsID = fruitsID;
+        this.nameFuirt = nameFuirt;
+        this.stock=stock;
+    }
     public FruitImage getFruitsImageUrl() {
         return fruitsImageUrl;
     }
@@ -142,11 +169,10 @@ public class Fruits {
 
     @Override
     public String toString() {
-        return "Fruits{" + "fruitsID=" + fruitsID + ", nameFuirt=" + nameFuirt + ", price=" + price + ", pathURL=" + pathURL + '}';
+        return "Fruits{" + "fruitsID=" + fruitsID + ", nameFuirt=" + nameFuirt + ", price=" + price + ", stock=" + stock + '}';
     }
 
-
-
-   
+    
+    
 
 }

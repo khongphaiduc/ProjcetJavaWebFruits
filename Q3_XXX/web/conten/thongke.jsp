@@ -48,11 +48,12 @@
         <section class="product-section">
             <h1 style="color: #28a745">Top 4 sản phẩm bán chạy nhất tại của hàng</h1>
             <div class="product-container">
-                <c:forEach var="s" items="${listTop}">                  
+                <c:forEach var="s" items="${listTops}">                  
                     <div class="product">
                     <img src="${s. pathURL}" alt="Product 1">
-                    <h2> Tên Sản Phẩm ${s.nameFuirt}</h2>
-                    <p>Giá Bán : ${s.price} Nghìn VND</p>                  
+                    <h2> Tên Sản Phẩm : ${s.nameFuirt}</h2>
+                    <p>Giá Bán : ${s.price} Nghìn VND</p>
+                    <p>Tổng lượng bán ra : ${s.quantity} KG</p>   
                 </div>
               </c:forEach>             
             </div>
