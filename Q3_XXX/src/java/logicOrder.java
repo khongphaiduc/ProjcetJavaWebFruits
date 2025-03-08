@@ -70,7 +70,7 @@ public class logicOrder extends DBContext {
             e.printStackTrace();
         }
 
-        return false; 
+        return false;
     }
 
     // ghi hóa đơn vào stringbuilder
@@ -167,12 +167,49 @@ public class logicOrder extends DBContext {
 
         }
     }
+    
+    
+    // update New  Stock of Product after add in order 
+    public void trusoluonginTable(int id, int number) {
+
+        try {
+            int Stock = 0;
+            String sql1 = "select s1.Stock\n"
+                    + "from [dbo].[Fruits]s1\n"
+                    + "where s1.FruitID=?";
+
+            PreparedStatement push1 = connection.prepareStatement(sql1);
+            push1.setInt(1, id);
+            ResultSet rs1 = push1.executeQuery();
+            
+            while (rs1.next()) {
+                Stock = rs1.getInt("Stock");
+            }
+
+            int NewStock = Stock - number;
+
+            String sql2 = "update [dbo].[Fruits]\n"
+                    + "set [Stock]=?\n"
+                    + "where [FruitID]=?";
+
+            PreparedStatement push2 = connection.prepareStatement(sql2);
+
+            push2.setInt(1, NewStock);
+            push2.setInt(2, id);
+
+            push2.executeUpdate();
+            System.out.println("Cạp nhật thành công");
+        } catch (Exception s) {
+            System.out.println("Fail");
+            s.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         logicOrder s = new logicOrder();
 
 //        System.out.println(s.addOrderSInDataBase("quynh anh", "2025/6/3", 9.9));
-        System.out.println(s.checkStockByID("127", 10));
-
+//  
+              s.trusoluonginTable(123, 100);
     }
 }

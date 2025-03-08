@@ -174,6 +174,14 @@ public class orders extends HttpServlet {
             for (var y : list) {
                 a.addDetailOrder(idOrder, y.getFruitsID(), y.getSoluong(), y.getPrice());
             }
+            
+            
+            // cập nhật lại Stock của sản phẩm sau khi xuất hóa đơn
+            for(var t :list){
+                a.trusoluonginTable(t.getFruitsID(), t.getSoluong());
+            }
+            
+            
 
             createFileOrder t = new createFileOrder();
             logicOrder or = new logicOrder();
