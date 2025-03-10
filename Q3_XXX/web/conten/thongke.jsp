@@ -65,10 +65,10 @@
         const revenueChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Ngày 1', 'Ngày 2', 'Now'],
+                labels: ['Ngày 1', 'Ngày 2', 'Ngày 3', 'Ngày 4','Hôm Nay'],
                 datasets: [{
                         label: 'Doanh Thu (VND)',
-                        data: [${listProfix.get(0)},${listProfix.get(1)},${listProfix.get(2)}],
+                        data: [${listProfix.get(0)},${listProfix.get(1)},${listProfix.get(2)},${listProfix.get(3)},${listProfix.get(4)}],
                         backgroundColor: 'rgba(75, 192, 192, 0.6)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
