@@ -54,8 +54,8 @@ public class statistic extends HttpServlet {
         List<Fruits> listTops =st.getTop4BestSaleOfFruit(); // lấy 4 sản phẩm bán chạy nhất
         request.setAttribute("listTops", listTops);
 
-        List<Double> listProfixofDays = st.getStatisticProfix();
-        request.setAttribute("listProfix", listProfixofDays);
+        List<Double> listProfix = st.getStatisticProfix();  // lấy doanh thu của quán trong 7 ngày 
+        request.setAttribute("listProfix", listProfix);
 
         request.getRequestDispatcher("/conten/thongke.jsp").forward(request, response);
     }
