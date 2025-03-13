@@ -17,6 +17,18 @@
 
         <!-- sử dụng bootstrap-->
 
+        <style>
+            .thongbaoxuatdon{
+                border-style:  solid;
+                border-radius: 6px;
+                margin-top: 50px;
+                background-color:#4CAF50;
+                padding:14px;
+                width: 400px;
+                color: #e8f5e9;
+            }
+
+        </style>
     </head>
     <body>
         <div class="container">
@@ -88,8 +100,8 @@
 
                     <h4>Số Tiền Cần Thanh Toán : ${itemMoney}K VND</h4>  
                 </div>
-                        <h4>${statusStock}</h4>
-                        <h4>${xuat}</h4>
+                <h4>${statusStock}</h4>
+                <h4>${xuat}</h4>
             </div>
 
             <!--         form 4 xóa tất cả trong hóa đơn-->
@@ -97,7 +109,15 @@
                 <input type="text" name="red" value="s"  style="display: none">
                 <button style="width: 200px ;background-color: #f3ec78 ;color: #4cae4c ;margin-right: 20px" class="checkout-button">Clean</button>
             </form>
-
+            <%
+        if (request.getAttribute("message") != null) {
+            %>
+            <div class="thongbaoxuatdon">
+                <h3><%= request.getAttribute("message") %></h3>
+            </div>
+            <%
+                }
+            %>
 
         </div>
     </body>

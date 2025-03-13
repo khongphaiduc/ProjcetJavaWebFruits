@@ -73,8 +73,9 @@ public class orders extends HttpServlet {
         }
 
         int totalMoney = 0;
-      
+
         try {
+            int idFruit = Integer.parseInt(idproduct);
 
             if (indexRemove != null) {
                 int indexR = Integer.parseInt(indexRemove);
@@ -90,12 +91,24 @@ public class orders extends HttpServlet {
 
             } else {
                 int number = Integer.parseInt(productQuantity);
-
+                 boolean check= false;
                 logicOrder v = new logicOrder();
                 // kiểm tra số lượng trong kho trước khi thêm vào hóa đơn
                 if (v.checkStockByID(idproduct, number)) {
-                    
-                    listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
+
+                    for (var t : listOrder) {
+
+                        if (t.getFruitsID() == idFruit) {
+                            t.setSoluong(t.getSoluong() + number);
+                             check=true;
+                            break;
+                        }
+                    }
+
+                    if(!check){
+                        listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
+                    } 
+                   
 
                     // tính tiền 
                     for (int i = 0; i < listOrder.size(); i++) {
@@ -106,7 +119,7 @@ public class orders extends HttpServlet {
                     seccion.setAttribute("listOrder", listOrder);
                     request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
                 } else {
-                    
+
                     String statusStock = "Thông báo :Số lượng sản phẩm trong kho không đủ vui lòng kiểm tra lại";
                     request.setAttribute("itemMoney", totalMoney);
                     seccion.setAttribute("listOrder", listOrder);
@@ -132,20 +145,20 @@ public class orders extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                                                                             
+
         String red = request.getParameter("red");
         HttpSession session = request.getSession();
 
         String nameCustomer = request.getParameter("customerName");
         List<Fruits> list = (List<Fruits>) session.getAttribute("listOrder");
-    
+
         if (list == null) {
             String xuat = "Trạng Thái: Đơn hàng rỗng";
             request.setAttribute("xuat", xuat);
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
             return;
-        }    
-        
+        }
+
         double totalMoney = 0;
 
         for (var l : list) {
@@ -174,14 +187,11 @@ public class orders extends HttpServlet {
             for (var y : list) {
                 a.addDetailOrder(idOrder, y.getFruitsID(), y.getSoluong(), y.getPrice());
             }
-            
-            
+
             // cập nhật lại Stock của sản phẩm sau khi xuất hóa đơn
-            for(var t :list){
+            for (var t : list) {
                 a.trusoluonginTable(t.getFruitsID(), t.getSoluong());
             }
-            
-            
 
             createFileOrder t = new createFileOrder();
             logicOrder or = new logicOrder();
@@ -190,6 +200,8 @@ public class orders extends HttpServlet {
             t.writeToFile(createFileOrder.getCurrentTime(), content); // ghi nội dung hóa đơn vào file 
 
             session.invalidate();     // xuất hóa đơn xong thì clean sesion 
+            String message = "Xuất Hóa Đơn Thành Công";
+            request.setAttribute("message", message);
             request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
 
         } catch (Exception s) {
@@ -197,7 +209,6 @@ public class orders extends HttpServlet {
         }
     }
 
-  
     @Override
     public String getServletInfo() {
         return "Short description";

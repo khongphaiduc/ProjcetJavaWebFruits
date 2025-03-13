@@ -119,7 +119,7 @@ public class mainlogic extends DBContext {
                     + "      ,[Origin]\n"
                     + "      ,[Country]\n"
                     + "  FROM [dbo].[Fruits]\n"
-                    + "WHERE [Price] LIKE ?";
+                    + "  where Price like ?";
 
             PreparedStatement push = connection.prepareStatement(sql);
             push.setString(1, "%" + price + "%"); // Thêm % vào tham số name trước khi truyền vào
@@ -389,8 +389,6 @@ public class mainlogic extends DBContext {
 //        s.insertFruitAndImage("Táo Envy", "13", "20", "New Zealand", "New Zealand", "imageFruits/taoEnvy.png");
 //        s.insertFruitAndImage("Táo Xanh", "14", "18", "USA", "USA", "imageFruits/taoXanh.jpg");
 //        s.insertFruitAndImage("Việt Quất", "15", "25", "Canada", "Canada", "imageFruits/vietQuat.jpg");
-  
-
 //        s.insertFruitAndImage("Dỏ Trái Cây Thậm Cẩm", "1", "15", "Ninh Bình", "Việt Nam", "imagedoqua/1.jpg");
 //        s.insertFruitAndImage("Táo Xanh", "2", "18", "Mỹ", "Mỹ", "imagedoqua/2.jpg");
 //        s.insertFruitAndImage("Nho Đen", "3", "20", "Pháp", "Pháp", "imagedoqua/3.jpg");
@@ -411,8 +409,15 @@ public class mainlogic extends DBContext {
 //        s.insertFruitAndImage("Lựu Đỏ", "17", "26", "Ấn Độ", "Ấn Độ", "imagedoqua/17.jpg");
 //        s.insertFruitAndImage("Táo Đỏ", "18", "20", "Trung Quốc", "Trung Quốc", "imagedoqua/18.jpg");
 //        s.insertFruitAndImage("Dưa Gang", "19", "18", "Miền Tây", "Việt Nam", "imagedoqua/19.jpg");
-//        s.insertFruitAndImage("Mít Thái", "20", "22", "Cần Thơ", "Việt Nam", "imagedoqua/20.jpg");
+// thêm các em xinh  tươi
+//        s.insertFruitAndImage("Dâu Ngon Mọng Nước", "100", "999", "Cần Thơ", "Việt Nam", "imageMau/dauDep.jpg");
+//        s.insertFruitAndImage("Táo VIP 1", "100", "999", "Bắc Giang", "Việt Nam", "imageMau/gioTao1.jpg");
+//        s.insertFruitAndImage("Dưa Hấu", "100", "999", "Thai Binh", "Việt Nam", "imageMau/mau1.jpg");
+//        s.insertFruitAndImage("Chuối VIP 2", "100", "999", "Ha Noi", "Việt Nam", "imageMau/mau2.jpg");
+//        s.insertFruitAndImage("Cam Tàu", "100", "999", "Bắc Kinh", "Trung Quốc", "imageMau/quaCam.jpg");
+//        s.insertFruitAndImage("Táo Ngây Thơ", "100", "999", "Ninh Bình", "Việt Nam", "imageMau/quaTao.jpg");
 
+        System.out.println(s.searchbyPrice("4"));
     }
 
 }

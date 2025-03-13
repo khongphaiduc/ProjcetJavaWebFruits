@@ -88,7 +88,7 @@ public class getDisplayListFruits extends HttpServlet {
                 int id = Integer.parseInt(search);
                 listFruits = s.searchbyID(id);   // theo id
                 request.setAttribute("listFruits", listFruits);
-            } else if (option.equalsIgnoreCase(" Price")) {
+            } else if (option.equalsIgnoreCase("price")) {
                 listFruits = s.searchbyPrice(search); // thoe giá
                 request.setAttribute("listFruits", listFruits);
             } else if (option.equalsIgnoreCase("Origin")) {

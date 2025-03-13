@@ -54,11 +54,11 @@ public class getThongKe extends DBContext {
         return "0";
     }
 
-    // thống kê doanh thu 4 ngày gần nhất 
+    // thống kê doanh thu 6 ngày gần nhất 
     public List<Double> getStatisticProfix() {
         List<Double> list = new ArrayList<>();
         try {
-            String sql = "select top(5) s1.OrderDate ,sum(s1.TotalAmount) as totalDay\n"
+            String sql = "select top(6) s1.OrderDate ,sum(s1.TotalAmount) as totalDay\n"
                     + "from [dbo].[Orders] s1 \n"
                     + "group by s1.OrderDate\n"
                     + "order by s1.OrderDate asc";

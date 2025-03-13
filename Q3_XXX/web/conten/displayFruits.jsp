@@ -24,7 +24,7 @@
                 <select id="option" name="option">
                     <option value="Name">Name</option>
                     <option value="Origin">Origin</option>
-                    <option value="Price">Price</option>                 
+                    <option value="price">Price</option>                 
                     <option value="Country">Country</option>
                     <option value="ID">ID</option>
                 </select>
