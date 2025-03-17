@@ -100,9 +100,10 @@ public class orders extends HttpServlet {
 
                         if (t.getFruitsID() == idFruit) {
                             t.setSoluong(t.getSoluong() + number);
+                            t.setSum(t.getPrice()*t.getSoluong());
                              check=true;
                             break;
-                        }
+                        } 
                     }
 
                     if(!check){
@@ -188,7 +189,7 @@ public class orders extends HttpServlet {
                 a.addDetailOrder(idOrder, y.getFruitsID(), y.getSoluong(), y.getPrice());
             }
 
-            // cập nhật lại Stock của sản phẩm sau khi xuất hóa đơn
+            // cập nhật lại Stock trong sql của sản phẩm sau khi xuất hóa đơn
             for (var t : list) {
                 a.trusoluonginTable(t.getFruitsID(), t.getSoluong());
             }

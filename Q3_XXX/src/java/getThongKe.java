@@ -78,8 +78,8 @@ public class getThongKe extends DBContext {
         return null;
     }
 
-    // lấy top 4 sản phẩm bán chạy nhất sử dụng cte của sql 
-    public List<Fruits> getTop4BestSaleOfFruit() {
+    // lấy top 8 sản phẩm bán chạy nhất sử dụng cte của sql 
+    public List<Fruits> getTop8BestSaleOfFruit() {
         List<Fruits> list = new ArrayList<>();
         try {
 
@@ -95,7 +95,7 @@ public class getThongKe extends DBContext {
                     + "join [dbo].[FruitImages]s2 on s1.FruitID=s2.FruitID\n"
                     + ")\n"
                     + "\n"
-                    + "select top(4) s1.FruitID,s1.Name,s2.Price,s1.result,s2.ImageURL\n"
+                    + "select top(8) s1.FruitID,s1.Name,s2.Price,s1.result,s2.ImageURL\n"
                     + "from  findTotalNumber s1 \n"
                     + "join  laypathImagegsanphamdaban s2 on s1.FruitID=s2.FruitID\n"
                     + "order by s1.result desc";

@@ -17,7 +17,8 @@
             <h1>Fresh Fruits Store</h1>
             <div class="nav">
                 <button type="button">Thống Kê</button>
-                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/svthongbao', '_blank')">Thông Báo</button>
+                <button type="button" onclick="window.open('<%= request.getContextPath() %>/topproduct', '_blank')">Xu Hướng</button>
+                <button type="button" onclick="window.open('<%= request.getContextPath() %>/svthongbao', '_blank')">Thông Báo</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/getDisplayListFruits', '_blank')">Kho Sản Phẩm</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/insertFruits', '_blank')">Nhập Hàng</button>
                 <button type="button" onclick="window.open('<%= request.getContextPath() %>/updateFruits', '_blank')">Update</button>

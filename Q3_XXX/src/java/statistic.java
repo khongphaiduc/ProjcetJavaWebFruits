@@ -50,9 +50,6 @@ public class statistic extends HttpServlet {
         String thoitiet = weather.getweather();                    // gọi API  lấy thời tiết hiện tại        
         request.setAttribute("thoitiet", thoitiet);
         getThongKe st = new getThongKe();
-        
-        List<Fruits> listTops =st.getTop4BestSaleOfFruit(); // lấy 4 sản phẩm bán chạy nhất
-        request.setAttribute("listTops", listTops);
 
         List<Double> listProfix = st.getStatisticProfix();  // lấy doanh thu của quán trong 7 ngày 
         request.setAttribute("listProfix", listProfix);

@@ -25,7 +25,7 @@
                         <tr> <th>ID Sản Phẩm</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Số Lượng Còn Lại</th>
-                            <th>Trạng Thái</th>
+                            <th>Trạng Thái</th>                        
                         </tr>
                     </thead>
                     <tbody>

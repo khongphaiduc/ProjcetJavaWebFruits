@@ -273,8 +273,8 @@ public class mainlogic extends DBContext {
         }
         return null;
     }
-// cập  nhật fuirt
 
+// cập  nhật fuirt
     public boolean updateFruit(String fruitID, String name, String price, String stock, String origin, String country) {
         String sql = "UPDATE Fruits SET Name = ?, Price = ?, Stock = ?, Origin = ?, Country = ? WHERE FruitID = ?";
 
@@ -292,6 +292,26 @@ public class mainlogic extends DBContext {
             e.printStackTrace();
             return false;
         }
+    }
+
+    //xóa Fuit
+    public void removeFruit(String idFruits) {
+
+        try {
+
+            String sql1 = "delete from [dbo].[FruitImages] where [FruitID] = ?";
+            PreparedStatement push1 = connection.prepareStatement(sql1);
+            push1.setString(1, idFruits);
+            push1.executeUpdate();
+            String sql2 = "delete from [dbo].[Fruits] where [FruitID] =?";
+            PreparedStatement push2 = connection.prepareStatement(sql2);
+            push2.setString(1, idFruits);
+            push2.executeUpdate();
+            System.out.println("Xóa Thành Công");
+        } catch (Exception s) {
+
+        }
+
     }
 
     // chèn quả với url ảnh bằng sử dụng procedure
@@ -377,47 +397,10 @@ public class mainlogic extends DBContext {
 //        s.insertFruitAndImage("Cam", "1", "2", "Vietnam", "Vietnam", "imageFruits/cam.jpg");
 //        s.insertFruitAndImage("Chanh Vàng", "2", "3", "Vietnam", "Vietnam", "imageFruits/chanhVang.jpg");
 //        s.insertFruitAndImage("Cherry", "3", "5", "USA", "USA", "imageFruits/cherry.jpg");
-//        s.insertFruitAndImage("Dưa Lưới", "4", "10", "Japan", "Japan", "imageFruits/duaLuoi.png");
-//        s.insertFruitAndImage("Hồng Dẻo", "5", "8", "Korea", "Korea", "imageFruits/hongDeo.jpg");
-//        s.insertFruitAndImage("Kiwi", "6", "12", "New Zealand", "New Zealand", "imageFruits/kiwi.jpg");
-//        s.insertFruitAndImage("Lê", "7", "6", "China", "China", "imageFruits/le.jpg");
-//        s.insertFruitAndImage("Lựu", "8", "7", "India", "India", "imageFruits/luu.jpg");
-//        s.insertFruitAndImage("Lựu Đỏ", "9", "9", "Turkey", "Turkey", "imageFruits/luu_1.jpg");
-//        s.insertFruitAndImage("Nho Ngón Tay", "10", "15", "Australia", "Australia", "imageFruits/nhoNgonTay.jpg");
-//        s.insertFruitAndImage("Sầu Riêng", "11", "30", "Thailand", "Thailand", "imageFruits/sauRieng.jpg");
-//        s.insertFruitAndImage("Táo Đỏ", "12", "4", "USA", "USA", "imageFruits/taoDo.jpg");
-//        s.insertFruitAndImage("Táo Envy", "13", "20", "New Zealand", "New Zealand", "imageFruits/taoEnvy.png");
-//        s.insertFruitAndImage("Táo Xanh", "14", "18", "USA", "USA", "imageFruits/taoXanh.jpg");
-//        s.insertFruitAndImage("Việt Quất", "15", "25", "Canada", "Canada", "imageFruits/vietQuat.jpg");
-//        s.insertFruitAndImage("Dỏ Trái Cây Thậm Cẩm", "1", "15", "Ninh Bình", "Việt Nam", "imagedoqua/1.jpg");
-//        s.insertFruitAndImage("Táo Xanh", "2", "18", "Mỹ", "Mỹ", "imagedoqua/2.jpg");
-//        s.insertFruitAndImage("Nho Đen", "3", "20", "Pháp", "Pháp", "imagedoqua/3.jpg");
-//        s.insertFruitAndImage("Xoài Cát", "4", "25", "Việt Nam", "Việt Nam", "imagedoqua/4.jpg");
-//        s.insertFruitAndImage("Dưa Hấu", "5", "10", "Thái Lan", "Thái Lan", "imagedoqua/5.jpg");
-//        s.insertFruitAndImage("Lê Hàn Quốc", "6", "22", "Hàn Quốc", "Hàn Quốc", "imagedoqua/6.jpg");
-//        s.insertFruitAndImage("Mận Hà Nội", "7", "12", "Việt Nam", "Việt Nam", "imagedoqua/7.jpg");
-//        s.insertFruitAndImage("Việt Quất", "8", "30", "Canada", "Canada", "imagedoqua/8.jpg");
-//        s.insertFruitAndImage("Cherry Đỏ", "9", "35", "Mỹ", "Mỹ", "imagedoqua/9.jpg");
-//        s.insertFruitAndImage("Dưa Lưới", "10", "40", "Nhật Bản", "Nhật Bản", "imagedoqua/10.jpg");
-//
-//        s.insertFruitAndImage("Ổi Xá Lị", "11", "13", "Đồng Nai", "Việt Nam", "imagedoqua/11.jpg");
-//        s.insertFruitAndImage("Cam Sành", "12", "16", "Tiền Giang", "Việt Nam", "imagedoqua/12.jpg");
-//        s.insertFruitAndImage("Dừa Xiêm", "13", "12", "Bến Tre", "Việt Nam", "imagedoqua/13.jpg");
-//        s.insertFruitAndImage("Hồng Giòn", "14", "24", "Đà Lạt", "Việt Nam", "imagedoqua/14.jpg");
-//        s.insertFruitAndImage("Mãng Cầu", "15", "28", "Vĩnh Long", "Việt Nam", "imagedoqua/15.jpg");
-//        s.insertFruitAndImage("Bưởi Da Xanh", "16", "32", "Bến Tre", "Việt Nam", "imagedoqua/16.jpg");
-//        s.insertFruitAndImage("Lựu Đỏ", "17", "26", "Ấn Độ", "Ấn Độ", "imagedoqua/17.jpg");
-//        s.insertFruitAndImage("Táo Đỏ", "18", "20", "Trung Quốc", "Trung Quốc", "imagedoqua/18.jpg");
-//        s.insertFruitAndImage("Dưa Gang", "19", "18", "Miền Tây", "Việt Nam", "imagedoqua/19.jpg");
-// thêm các em xinh  tươi
-//        s.insertFruitAndImage("Dâu Ngon Mọng Nước", "100", "999", "Cần Thơ", "Việt Nam", "imageMau/dauDep.jpg");
-//        s.insertFruitAndImage("Táo VIP 1", "100", "999", "Bắc Giang", "Việt Nam", "imageMau/gioTao1.jpg");
-//        s.insertFruitAndImage("Dưa Hấu", "100", "999", "Thai Binh", "Việt Nam", "imageMau/mau1.jpg");
-//        s.insertFruitAndImage("Chuối VIP 2", "100", "999", "Ha Noi", "Việt Nam", "imageMau/mau2.jpg");
-//        s.insertFruitAndImage("Cam Tàu", "100", "999", "Bắc Kinh", "Trung Quốc", "imageMau/quaCam.jpg");
-//        s.insertFruitAndImage("Táo Ngây Thơ", "100", "999", "Ninh Bình", "Việt Nam", "imageMau/quaTao.jpg");
 
-        System.out.println(s.searchbyPrice("4"));
+       
+
+        s.removeFruit("132");
     }
 
 }

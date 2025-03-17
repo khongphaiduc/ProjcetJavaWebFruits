@@ -68,10 +68,18 @@ public class updateFruits extends HttpServlet {
         String origin = request.getParameter("origin");
         String country = request.getParameter("country");
 
+        String update = request.getParameter("xoa");
+        if (update != null) {
+            s.removeFruit(id);  //xóa fruits
+            String status ="Xóa Thành Công !";
+            request.setAttribute("status", status);
+             request.getRequestDispatcher("/conten/update.jsp").forward(request, response);
+            return;
+        }
         if (s.updateFruit(id, name, price, stock, origin, country)) {
             String statuc = "Update thành công";
             request.setAttribute("status", statuc);
-            request.getRequestDispatcher("/conten/displayFruits.jsp").forward(request, response);
+            request.getRequestDispatcher("/conten/update.jsp").forward(request, response);
         } else {
             String statuc = "Update Fail";
             request.setAttribute("status", statuc);
