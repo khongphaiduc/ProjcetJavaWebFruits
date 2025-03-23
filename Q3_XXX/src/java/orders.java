@@ -66,7 +66,8 @@ public class orders extends HttpServlet {
         String idproduct = request.getParameter("productID");
         String productQuantity = request.getParameter("productQuantity");
         String indexRemove = request.getParameter("indexRemove");
-
+        String red1 = request.getParameter("red1");
+     
         List<Fruits> listOrder = (List<Fruits>) seccion.getAttribute("listOrder");
         if (listOrder == null) {
             listOrder = new ArrayList<>();
@@ -84,14 +85,14 @@ public class orders extends HttpServlet {
                 for (int i = 0; i < listOrder.size(); i++) {
                     totalMoney += listOrder.get(i).getSum();
                 }
+
                 request.setAttribute("itemMoney", totalMoney);
-                //  
                 seccion.setAttribute("listOrder", listOrder);
                 request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
 
             } else {
                 int number = Integer.parseInt(productQuantity);
-                 boolean check= false;
+                boolean check = false;
                 logicOrder v = new logicOrder();
                 // kiểm tra số lượng trong kho trước khi thêm vào hóa đơn
                 if (v.checkStockByID(idproduct, number)) {
@@ -100,16 +101,15 @@ public class orders extends HttpServlet {
 
                         if (t.getFruitsID() == idFruit) {
                             t.setSoluong(t.getSoluong() + number);
-                            t.setSum(t.getPrice()*t.getSoluong());
-                             check=true;
+                            t.setSum(t.getPrice() * t.getSoluong());
+                            check = true;
                             break;
-                        } 
+                        }
                     }
 
-                    if(!check){
+                    if (!check) {
                         listOrder.add(s.getFruitbyID(idproduct, number)); // add vào hóa đơn
-                    } 
-                   
+                    }
 
                     // tính tiền 
                     for (int i = 0; i < listOrder.size(); i++) {
@@ -119,9 +119,21 @@ public class orders extends HttpServlet {
                     request.setAttribute("itemMoney", totalMoney);
                     seccion.setAttribute("listOrder", listOrder);
                     request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
+                } else if (red1 != null) {
+
+                    // tính tiền 
+                    for (int i = 0; i < listOrder.size(); i++) {
+                        totalMoney += listOrder.get(i).getSum();
+                    }
+                    totalMoney += 1000;
+                    request.setAttribute("itemMoney", totalMoney);
+                    System.out.println(totalMoney);
+                    seccion.setAttribute("listOrder", listOrder);
+                    request.getRequestDispatcher("/conten/order.jsp").forward(request, response);
                 } else {
 
-                    String statusStock = "Thông báo :Số lượng sản phẩm trong kho không đủ vui lòng kiểm tra lại";
+                    String statusStock = "Thông báo  số lượng 0";
+
                     request.setAttribute("itemMoney", totalMoney);
                     seccion.setAttribute("listOrder", listOrder);
                     request.setAttribute("statusStock", statusStock);

@@ -62,7 +62,7 @@ public class topproduct extends HttpServlet {
 
         List<Fruits> listTop = s.getTop8BestSaleOfFruit(); // top 8 sản phẩm bán chạy nhất của cửa hàng 
         request.setAttribute("listTops", listTop);
-        request.getRequestDispatcher("subconten/trang1.jsp").forward(request, response);
+        request.getRequestDispatcher("subconten/topProduct.jsp").forward(request, response);
     }
 
   

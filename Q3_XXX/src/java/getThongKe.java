@@ -58,17 +58,17 @@ public class getThongKe extends DBContext {
     public List<Double> getStatisticProfix() {
         List<Double> list = new ArrayList<>();
         try {
-            String sql = "select top(7) s1.OrderDate ,sum(s1.TotalAmount) as totalDay\n"
+            String sql = "select top 7 s1.OrderDate,  sum(s1.TotalAmount) as [Money]\n"
                     + "from [dbo].[Orders] s1 \n"
                     + "group by s1.OrderDate\n"
-                    + "order by s1.OrderDate asc";
+                    + "order by day(s1.OrderDate)  desc";
 
             PreparedStatement push = connection.prepareStatement(sql);
 
             ResultSet rs = push.executeQuery();
 
             while (rs.next()) {
-                list.add(rs.getDouble("totalDay"));
+                list.add(rs.getDouble("Money"));
             }
 
             return list;
@@ -162,7 +162,8 @@ public class getThongKe extends DBContext {
     public static void main(String[] args) {
         getThongKe s = new getThongKe();
 
-        System.out.println(s.getProductStock());
+        System.out.println(s.getStatisticProfix());
+
     }
 
 }

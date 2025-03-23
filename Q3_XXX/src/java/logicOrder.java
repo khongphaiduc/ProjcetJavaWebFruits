@@ -72,6 +72,28 @@ public class logicOrder extends DBContext {
 
         return false;
     }
+    
+    
+       public int checkStockByID1(String id, int number) {
+        String sql = "SELECT Stock FROM [dbo].[Fruits] WHERE FruitID = ?";
+
+        try {
+            PreparedStatement push = connection.prepareStatement(sql);
+            push.setString(1, id); // Sửa lỗi setInt thành setString
+
+            ResultSet rs = push.executeQuery();
+
+            if (rs.next()) { // Nếu có dữ liệu trả về
+                int stock = rs.getInt("Stock");
+              
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
     // ghi hóa đơn vào stringbuilder
     public String ghicontenhoadon(String name, String phone, List<Fruits> list) {

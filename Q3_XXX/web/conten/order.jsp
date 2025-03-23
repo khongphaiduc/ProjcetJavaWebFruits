@@ -102,6 +102,7 @@
                 </div>
                 <h4>${statusStock}</h4>
                 <h4>${xuat}</h4>
+                 
             </div>
 
             <!--         form 4 xóa tất cả trong hóa đơn-->
@@ -109,6 +110,9 @@
                 <input type="text" name="red" value="s"  style="display: none">
                 <button style="width: 200px ;background-color: #f3ec78 ;color: #4cae4c ;margin-right: 20px" class="checkout-button">Clean</button>
             </form>
+
+           
+            
             <%
         if (request.getAttribute("message") != null) {
             %>
@@ -120,6 +124,11 @@
             %>
 
         </div>
+            <form  action="orders" method="get">
+                <input type="text" name="red1" value="s"  style="display: none">
+                <button  style="width: 200px" class="checkout-button">add</button>    
+            </form>
+            
     </body>
 
 </html>
